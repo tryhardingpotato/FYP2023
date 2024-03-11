@@ -1,0 +1,295 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-size:62.5%
+}
+
+h1{
+    font-size:3rem;
+}
+p{
+    font-size:3rem;
+}
+.intro{
+    margin-bottom:3rem;
+}
+.container{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem;
+    ;
+}
+/* Media query for screens smaller than 768px */
+@media screen and (max-width: 767px) {
+    .container {
+        max-width: 90%; /* Adjust the maximum width for smaller screens */
+    }
+}
+
+/* Media query for screens between 768px and 1023px */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        padding: 1rem; /* Adjust the padding for medium-sized screens */
+    }
+}
+
+/* Media query for screens larger than 1023px */
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 3rem; /* Adjust the padding for larger screens */
+    }
+}
+#mycanvas{
+    border-color: white;
+    border-style: solid;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+body{
+    background-color: black;
+    background-attachment: fixed;
+    font-weight: bold;
+    color:white
+}
+#question{
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
+    font-size: 2.7rem; /* Set font size relative to viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    
+    
+}
+.instructions {
+    list-style: inside;
+    padding: 1rem 0 1rem 0;
+    color:yellowgreen;
+    font-size: 75%;
+}
+
+.highlight
+{
+    color: rgb(6, 185, 6);
+}
+.highlight1{
+    color: red;
+}
+
+.variable-x {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  
+.variable-y {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable Y */
+  }
+  
+.variable-z {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable Z */
+  }
+.variable-S0 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  .variable-S1 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  .variable-I0 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  .variable-I1 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  .variable-I2 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }
+  .variable-I3 {
+    font-size: 2.7rem;
+    color: rgb(0, 255, 34); /* Change color of variable X */
+  }  
+.output{
+    font-size: 2.7rem;
+    color: rgb(255, 0, 0);
+}
+.multiplexer{
+    font-size: 2.7rem;
+    color:rgb(159, 68, 245);
+}
+.justify{
+    justify-content: center;
+}
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+#navex{
+    display: flex;
+    justify-content: space-between;
+}
+.navex{
+    text-align: center;
+    font-size: 3rem;
+}
+.nav-button{
+    text-align: center;
+    font-size: 3rem;
+    font-family: "Comic Sans MS", "Chalkboard", fantasy;
+    color: rgb(198, 236, 94) ;
+    height: 45px;
+    text-decoration: none;
+}
+a.nav-button{
+    color: rgb(4, 196, 46);
+}
+#decoder:hover{
+    color: rgb(6, 230, 55);
+}
+#help {
+    margin-left:5px;
+    border:none;
+    color: white;
+    background-color: transparent;
+    cursor: help;
+    
+}
+#help:hover{
+    color:gray;
+}
+#help{
+    font-size: 3rem;
+}
+.option{
+    display:flex;
+    width:100%;
+    border-radius: 4px;
+    background-color: aqua;
+    color:brown;
+    font-size: 3rem;
+    max-width: 72rem;
+    cursor:pointer;
+}
+
+.option:hover{
+    
+    box-shadow: 0 0.4rem 1.4rem 0 rgb(73, 56, 14);
+    transform: scale(1.02);
+    transition-duration: 0.5s;
+}
+.option-text{
+    text-align:center;
+    padding:2rem;
+    width:100%;
+    background-color: inherit;
+}
+.disabled-pointer-events {
+    pointer-events: none; /* Disable pointer events */
+  }
+.mcq{
+    display:grid;
+    grid-template-columns: repeat(2,auto);
+    gap:8px;
+}
+.btmbutton{
+    font-weight: bold;
+    padding: 5px 10px;
+    color:rgb(0, 0, 0);
+    background-color: rgba(0, 255, 64, 0.767);
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 2rem;
+    max-width:150rem;
+    margin-top:10px;
+}
+.btmbutton:hover{
+    background-color: rgb(72, 255, 0);
+}
+#next{
+    font-size: 40px;
+}
+
+.truth-table{
+    color:white;
+    font-size: 90px;
+    margin-left: 30px;
+}
+.truth-table th{
+    border: 1px solid white; /* Optional: add borders to cells */
+  padding: 5px; /* Optional: add padding to cells */
+}
+.truth-table td{
+    border: 1px solid white; /* Optional: add borders to cells */
+    padding: 10px; /* Optional: add padding to cells */
+}
+.table-container {
+    display: flex; /* Use flexbox to align tables horizontally */
+  }
+ 
+ .truth-table1{
+    color:white;
+    font-size: 90px;
+}
+.truth-table1 th{
+    border: 1px solid white; /* Optional: add borders to cells */
+  padding: 10px; /* Optional: add padding to cells */
+
+}
+.truth-table1 td{
+    border: 1px solid white; /* Optional: add borders to cells */
+  padding: 10px; /* Optional: add padding to cells */
+} 
+.truth-table,
+.truth-table1 {
+    flex: 1; /* Each table takes up equal width */
+    margin-right: 60px; /* Optional: add spacing between tables */
+  }
+
+.popup{
+    background-color: rgb(2, 17, 45);
+    color: white;
+    font-size: 4rem;
+    padding: 1em;
+    max-width: 30ch;
+    border: 0;
+    box-shadow: 0 0 1em rgb(0 0 0 / .3);
+    margin: auto;
+}
+.popup::backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+}
+.close-button{
+    float: right;
+    border: none;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}
+.close-button i{
+    font-size: 3rem;
+}
