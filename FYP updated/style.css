@@ -230,14 +230,15 @@ a.nav-button{
 .truth-table{
     color:white;
     font-size: 90px;
+    margin-left: 30px;
 }
 .truth-table th{
     border: 1px solid white; /* Optional: add borders to cells */
-  padding: 10px; /* Optional: add padding to cells */
+  padding: 5px; /* Optional: add padding to cells */
 }
 .truth-table td{
     border: 1px solid white; /* Optional: add borders to cells */
-  padding: 10px; /* Optional: add padding to cells */
+    padding: 10px; /* Optional: add padding to cells */
 }
 .table-container {
     display: flex; /* Use flexbox to align tables horizontally */
@@ -250,6 +251,7 @@ a.nav-button{
 .truth-table1 th{
     border: 1px solid white; /* Optional: add borders to cells */
   padding: 10px; /* Optional: add padding to cells */
+
 }
 .truth-table1 td{
     border: 1px solid white; /* Optional: add borders to cells */
@@ -258,7 +260,7 @@ a.nav-button{
 .truth-table,
 .truth-table1 {
     flex: 1; /* Each table takes up equal width */
-    margin-right: 100px; /* Optional: add spacing between tables */
+    margin-right: 60px; /* Optional: add spacing between tables */
   }
 
 .popup{

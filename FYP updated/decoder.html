@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combinatorial Logic Circuits</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://kit.fontawesome.com/4ad51bb2aa.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div id="outerframe" class="justify flex">
+      <div id="navex">
+        <div class="nav-button">
+          MCQ Practice
+          <button id="help">
+            <i class="fa-regular fa-circle-question fa-lg mb-50" style="color: #78a2ec;"></i>
+          </button>
+
+        </div>
+
+        <a href="index.html" class="nav-button" id="homepage">Multiplexers</a>
+      </div>
+
+      <canvas id="mycanvas" width="1400" height="470">
+      </canvas>
+      <p id="question"></p>
+      <div class="mcq">
+        <div class="option">
+          <button class="option-text" id="option1"> </button>
+        </div>
+        <div class="option">
+          <button class="option-text" id="option2"></button>
+        </div>
+        <div class="option">
+          <button class="option-text" id="option3"></button>
+        </div>
+        <div class="option">
+          <button class="option-text" id="option4"></button>
+        </div>
+      </div>
+
+      <script src="./const.js"></script>
+      <script src="./question.js"></script>
+      <script src="./draw.js"></script>
+      <script src="./demux.js"></script>
+      <button id="next" class="btmbutton" onclick="next_qn()">Next Question</button>
+    </div>
+
+  </div>
+</body>
+
+<dialog class="popup" id="popup">
+  <button class="close-button">
+    <i class="fa-regular fa-circle-xmark fa-bounce fa-xs"></i>
+  </button>
+  <p style="text-decoration: underline; color: #00f836;">HOW TO USE</p>
+  <p style="font-size: 3rem;">Select the correct output, given input for each type of Multiplexers</p>
+  <ul class="instructions">
+    <li>1-to-2 decoder and 2-to-4 decoders will be generated</li>
+    <li>Both Active High and Active Low decoders will be generated</li>
+    <li>OR / NOR / AND / NAND gates will be connected</li>
+    <li>There will be 0 to 4 connection lines connected to the gates</li>
+    <li>Select the options by clicking on 1 out of the 4 aqua buttons</li>
+    <li>Correct answers will be highlighted in <span class="highlight">GREEN</span></li>
+    <li>Wrong answers will be highlighted in <span class="highlight1">RED</span></li>
+    <li>You only got one attempt per Question</li>
+    <li>"CHANGE QUESTION" will generate a new question</li>
+
+    <hr style="margin: 20px 0 0px 0;">
+    <p class="truth-table" style="font-size: 3rem; color: white; margin-bottom: 10px; margin-top: 10px;">Truth Tables (Active high):
+    </p>
+    <p class="title" style="font-size: 2rem; color: violet; margin-bottom: 10px; margin-left: 27px;">1-to-2 Decoder<span
+        style="margin-right: 140px;"></span>2-to-4 Decoder</p>
+    <div class="table-container">
+      <table class="truth-table">
+        <thead>
+          <tr>
+            <th>I0</th>
+            <th>Y0</th>
+            <th>Y1</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <table class="truth-table1">
+        <thead>
+          <tr>
+            <th>I1</th>
+            <th>I0</th>
+            <th>Y0</th>
+            <th>Y1</th>
+            <th>Y2</th>
+            <th>Y3</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr>
+            <th>0</th>
+            <th>0</th>
+            <th>1</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+          </tr>
+          <tr>
+            <th>0</th>
+            <th>1</th>
+            <th>0</th>
+            <th>1</th>
+            <th>0</th>
+            <th>0</th>
+          </tr>
+          <tr>
+            <th>1</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>1</th>
+            <th>0</th>
+          </tr>
+          <tr>
+            <th>1</th>
+            <th>1</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>1</th>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </ul>
+</dialog>
+<script>
+  const modal = document.querySelector(".popup");
+  const openModal = document.querySelector("#help");
+  const closeModal = document.querySelector(".close-button");
+  openModal.addEventListener("click", () => {
+    modal.showModal();
+  });
+
+  closeModal.addEventListener("click", () => {
+    modal.close();
+  });
+</script>
+
+</html>
