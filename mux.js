@@ -7,13 +7,13 @@ const option_ids = [1, 2, 3, 4].map((id) => `option${id}`);
 const qns = [
   {
     question:
-      "Given a 2x1 Multiplexer  of output Y = f(A,B,C), where I0 = ${Y} , I1 = ${Z} , S0 = ${X}, what are the minterms of Y",
+      "Given the above logic circuit, find the minterms of the logic function F(A,B,C) ",
     question_type: "2x1",
 
   },
   {
     question:
-      "Given a 4x1 Multiplexer of Y = f(A,B,C), where I0 = ${I0} , I1 = ${I1} , I2 = ${I2}, I3 = ${I3}, S0 = ${S0}, S1 = ${S1}, what are the minterms of Y",
+      "Given the above logic circuit, find the minterms of the logic function F(A,B,C)"  /*"Given a 4x1 Multiplexer of Y = f(A,B,C), where I0 = ${I0} , I1 = ${I1} , I2 = ${I2}, I3 = ${I3}, S0 = ${S0}, S1 = ${S1}, what are the minterms of Y"*/,
     question_type: "4x1",
   },
 ];
@@ -44,8 +44,8 @@ const generate_2x1_qn = () => {
   console.log(`where I0 = ${num_y} , I1 = ${num_z} , S0 = ${num_x}`);
   const correct_ans = decimal_to_binary_2x1(num_y, num_z, num_x);
   console.log(correct_ans);
-  
-  console.log(X,Y,Z);
+
+  console.log(X, Y, Z);
   // Generate random options with one correct answer
   const options = generateRandomOptions(correct_ans);
   return { X, Y, Z, options, correct_ans };
@@ -106,7 +106,7 @@ const generate_4x1_qn = () => {
   const I2 = getRandomVariable(["A", "A`", "B", "B`", "C", "C`"]);
   const I3 = getRandomVariable(["A", "A`", "B", "B`", "C", "C`"]);
   console.log(`where I0 = ${I0} , I1 = ${I1} , I2 = ${I2}, I3 = ${I3} , S0 = ${S0} , S1 = ${S1}`);
-  const logic_S0 = map_letter_to_no_4x1(S0);
+  const logic_S0 = map_letter_to_no_4x1(S0); //in 0 or 1
   const logic_S1 = map_letter_to_no_4x1(S1);
   const logic_I0 = map_letter_to_no_4x1(I0);
   const logic_I1 = map_letter_to_no_4x1(I1);
@@ -125,11 +125,11 @@ const decimal_to_binary_4x1 = (I0, I1, I2, I3, S0, S1, logic_I0, logic_I1, logic
   const combinations = [];
   for (let i = 0; i < 8; i++) {
     const binary = i.toString(2).padStart(3, '0');
-    const selector1 = parseInt(binary[0]);
+    const selector1 = parseInt(binary[0]); // A
 
-    const selector0 = parseInt(binary[1]);
+    const selector0 = parseInt(binary[1]); // B
 
-    const input = parseInt(binary[2]);
+    const input = parseInt(binary[2]); // C
 
 
     const result = mux4x1logic(selector0, selector1, input, I0, I1, I2, I3, S0, S1, logic_I0, logic_I1, logic_I2, logic_I3);
@@ -141,7 +141,7 @@ const decimal_to_binary_4x1 = (I0, I1, I2, I3, S0, S1, logic_I0, logic_I1, logic
 
   }
   if (combinations.length === 0) {
-    decimal_to_binary_4x1();
+    generate_4x1_qn();//decimal_to_binary_4x1();
   }
   console.log(combinations);
   return combinations;
@@ -153,87 +153,75 @@ const mux4x1logic = (selector0, selector1, input, I0, I1, I2, I3, S0, S1, logic_
   let invinput = 0;
 
   if (S0 === 'B`') {
-    invselect0 = +!selector0;
+    invselect0 = +!selector0; //inverts of selector0 is 1. 
   }
   else if (S0 === 'B') {
     invselect0 = selector0;
   }
   if (S1 === 'A`') {
-    invselect1 = +!selector1;
+    invselect1 = +!selector1; //invertsd if selecter1 is 1
   }
   else if (S1 === 'A') {
     invselect1 = selector1;
   }
 
   if (I0 === 'C`' || I1 === 'C`' || I2 === 'C`' || I3 === 'C`') {
-    invinput = +!input;
+    invinput = +!input;  //inverts inputs if its 1. 
   }
 
   console.log("binary inputs:", selector1, selector0, input);
   console.log("inverted inputs (if have):", invselect1, invselect0, invinput);
-
+  // check this part. When selector is inverted, the order of priority of input changes. eg if after inversion, minterm 0 will be I2 if its selector is A` and B. 
   if (invselect1 === 0 && invselect0 === 0) {
     console.log("I0:", I0);
-    const answer = conditions_4x1(I0, S0, S1, logic_I0, input, invinput, selector1, invselect1, selector0, invselect0);
+    const answer = conditions_4x1(I0, logic_I0, input, selector1, selector0);
     console.log("I0 output:", answer);
     return answer;
   } else if (invselect1 === 0 && invselect0 === 1) {
     console.log("I1:", I1);
-    const answer = conditions_4x1(I1, S0, S1, logic_I1, input, invinput, selector1, invselect1, selector0, invselect0);
+    const answer = conditions_4x1(I1, logic_I1, input, selector1, selector0);
     console.log("I1 output:", answer);
     return answer;
   } else if (invselect1 === 1 && invselect0 === 0) {
     console.log("I2:", I2);
-    const answer = conditions_4x1(I2, S0, S1, logic_I2, input, invinput, selector1, invselect1, selector0, invselect0);
+    const answer = conditions_4x1(I2, logic_I2, input, selector1, selector0);
     console.log("I2 output:", answer);
     return answer;
   } else if (invselect1 === 1 && invselect0 === 1) {
     console.log("I3:", I3);
-    const answer = conditions_4x1(I3, S0, S1, logic_I3, input, invinput, selector1, invselect1, selector0, invselect0);
+    const answer = conditions_4x1(I3, logic_I3, input, selector1, selector0);
     console.log("I3 output:", answer);
     return answer;
   }
 };
 
 
-let conditions_4x1 = (datalines, S0, S1, logic, input, invinput, selector1, invselect1, selector0, invselect0) => {
+let conditions_4x1 = (datalines, logic, input, selector1, selector0) => {
   console.log("Reached function condition_4x1");
   let inputValue = 0;
-  console.log("Logic of dataline:", logic);
+  console.log("Logic of dataline:", logic); //  0 or 1. Datalines are letters 
   //Select 1 (A)
-  if ((datalines === S1 && S1 == "A`") || (datalines === S1 && S1 == "A")) {
+  if (datalines === "A") {
     inputValue = selector1;
-    console.log("choose condition 1");
-  } else if (datalines === 'A' && S1 === 'A`') {
-    inputValue = invselect1;
-    console.log("choose condition 2");
   }
-  else if (datalines === 'A`' && S1 === "A") {
-    inputValue = +!invselect1;
-    console.log("choose condition 3");
-  }
-  //Selet 0 (B)
-  //check if datalines = S0 = B`
-  else if ((datalines === S0 && S0 === 'B`') || (datalines === S0 && S0 == "B")) {
-    inputValue = selector0;
-    console.log("choose condition 4");
-  }
-  else if (datalines === 'B' && S0 === "B`") {
-    inputValue = invselect0;
-    console.log("choose condition 5");
-  }
-  else if (datalines === 'B`' && S0 === "B") {
-    inputValue = +!invselect0;
-    console.log("choose condition 6");
+  else if (datalines === "A`") {
+    inputValue = +!selector1;
   }
 
-  else if (datalines === 'C') {
-    inputValue = input;
-    console.log("choose condition 7");
-  } else if (datalines === 'C`') {
-    inputValue = invinput;
-    console.log("choose condition 8");
+  else if (datalines === "B") {
+    inputValue = selector0;
   }
+  else if (datalines === "B`") {
+    inputValue = +!selector0;
+  }
+  else if (datalines === "C") {
+    inputValue = input;
+  }
+  else if (datalines === "C`") {
+    inputValue = +!input;
+  }
+
+
 
   return inputValue;
 };
@@ -303,21 +291,6 @@ const check_answer_2x1 = (option_id, correct_ans) => {
   });
 };
 
-/*const check_answer_4x1 = (option_id, correct_ans) => {
-  const clicked_btn = document.getElementById(option_id);
-  if (clicked_btn.innerText !== correct_ans) {
-    clicked_btn.style.backgroundColor = "red";
-  }
-  option_ids.forEach((option) => {
-    const current_btn = document.getElementById(option);
-    current_btn.disabled = true;
-    if (correct_ans === current_btn.innerText) {
-      current_btn.style.backgroundColor = "green";
-      return;
-    }
-  });
-};*/
-
 
 const getRandomVariable = (options) => {
   const randomIndex = Math.floor(Math.random() * options.length);
@@ -328,27 +301,16 @@ const load_qn = (question, question_type) => {
   const { draw, qn } = question_mapping_mux[question_type];
   const { S0, S1, I0, I1, I2, I3, X, Y, Z, correct_ans } = qn();
   let formattedQuestion = question
-    .replace("2x1 Multiplexer", `<span class="multiplexer">&nbsp2x1 Multiplexer&nbsp</span>`)
-    .replace("4x1 Multiplexer", `<span class="multiplexer"> 4x1 Multiplexer </span>`)
-    .replace("Y", `<span class="output">&nbspY&nbsp </span>`)
-    .replace("${X}", `<span class="variable-x"> &nbsp${X}</span>`)
-    .replace("${Y}", `<span class="variable-y"> &nbsp${Y}</span>`)
-    .replace("${Z}", `<span class="variable-z"> &nbsp${Z}</span>`)
-    .replace("${S0}", `<span class="variable-S0"> &nbsp${S0}</span>`)
-    .replace("${S1}", `<span class="variable-S1"> &nbsp${S1}</span>`)
-    .replace("${I0}", `<span class="variable-I0"> &nbsp${I0}</span>`)
-    .replace("${I1}", `<span class="variable-I1"> &nbsp${I1}</span>`)
-    .replace("${I2}", `<span class="variable-I2"> &nbsp${I2}</span>`)
-    .replace("${I3}", `<span class="variable-I3"> &nbsp${I3}</span>`);
-   
+    .replace("F(A,B,C)", `<span class="output">&nbspF(A,B,C)&nbsp</span>`)
+
   document.getElementById("question").innerHTML = formattedQuestion;
 
- console.log(question_type);
-  if (question_type === "2x1"){
-    draw(X,Y,Z);
+  console.log(question_type);
+  if (question_type === "2x1") {
+    draw(X, Y, Z);
   }
-  else{
-    draw(S0,S1,I0,I1,I2,I3);
+  else {
+    draw(S0, S1, I0, I1, I2, I3);
   }
 };
 
