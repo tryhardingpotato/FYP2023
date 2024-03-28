@@ -45,6 +45,8 @@ function draw2x1MUX(X, Y, Z) {
   ctx.fillText("2 X 1 Multiplexer", startX + 52, startY + 170);
   ctx.fillStyle = "red";
   ctx.fillText("Y", startX + 210, startY + 170);
+  ctx.font = "16px Arial";
+  ctx.fillText("F(A,B,C)", startX+300 , startY+170);
 }
 
 function draw4x1Mux(S0,S1,I0,I1,I2,I3) { //TOCHANGE
@@ -110,6 +112,8 @@ function draw4x1Mux(S0,S1,I0,I1,I2,I3) { //TOCHANGE
   ctx.fillText("4 X 1 Multiplexer", startX + 52, startY + 170);
   ctx.fillStyle = "red";
   ctx.fillText("Y", startX + 210, startY + 170);
+  ctx.font = "16px Arial";
+  ctx.fillText("F(A,B,C)", startX+300 , startY+170);
 }
 
 function draw1to2Decoder(input, gates) {
